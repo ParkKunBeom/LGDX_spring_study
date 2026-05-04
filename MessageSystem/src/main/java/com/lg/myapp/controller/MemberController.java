@@ -18,7 +18,7 @@ public class MemberController {
 	}
 	
 	// get방식으로 "/"라고 요청이 들어오면 바로 아래에 있는 메소드를 실행시키겠습니다!
-	@GetMapping("/") // contextPath(mas) + / 로 요청이 들어왔을 때 아래 메소드 실행
+	@GetMapping("/") // contextPath(msg) + / 로 요청이 들어왔을 때 아래 메소드 실행
 	public String main() {
 		return "Main"; // .html 확장자는 우리 눈에 보이진 않지만 뷰 리졸버가 붙여줌
 	}
