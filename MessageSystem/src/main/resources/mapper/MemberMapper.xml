@@ -3,14 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lg.myapp.mapper.MemberMapper">
-   <!-- 
-      인터페이스에서 mapper로 넘어올 수 있는 조건
-         1. namespace가 interface 이름과 동일하거나
-         2. xml 파일과 interface 이름이 동일하면
-      알아서 맞춰줌
-    -->
-    
-    <insert id="memberJoin" parameterType="com.lg.myapp.model.Member">
-       insert into member values(#{email}, #{pw}, #{tel}, #{address})
-    </insert>
+	<!-- 인터페이스에서 mapper로 넘어올 수 있는 조건 1. namespace가 interface 이름과 동일하거나 2. xml 
+		파일과 interface 이름이 동일하면 알아서 맞춰줌 -->
+
+	<insert id="memberJoin" parameterType="com.lg.myapp.model.Member">
+		insert into member values(#{email}, #{pw}, #{tel}, #{address})
+	</insert>
+
+	<select id="memberLogin" parameterType="com.lg.myapp.model.Member" resultType="com.lg.myapp.model.Member">
+		select * from member where email=#{email} and pw=#{pw}
+	</select>
+
+	<update id="memberUpdate" parameterType="com.lg.myapp.model.Member">
+		update member set pw = #{pw}, tel = #{tel}, address = #{address} where email = #{email}
+	</update>
+	
+	<select id="showMember" resultType="com.lg.myapp.model.Member">
+		select * from member where email != 'admin'
+	</select>
 </mapper> 

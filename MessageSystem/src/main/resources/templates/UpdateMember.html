@@ -13,11 +13,12 @@
 					<nav id="Update">	
 						<ul class="actions vertical">
 							<li><h5>회원정보수정</h5></li>
-								<form action="">
-									<li>접속한 Email : 접속한 Email 출력</li>
-									<li><input type="password" placeholder="PW를 입력하세요" style="width: 500px; margin: 0 auto;"></li>
-									<li><input type="text" placeholder="전화번호를 입력하세요" style="width: 500px; margin: 0 auto;"></li>
-									<li><input type="text" placeholder="집주소를 입력하세요" style="width: 500px; margin: 0 auto;"></li>
+								<form th:action="@{/memberUpdate}" method="post">
+									<li th:text="${session.mem.email}"></li>
+									<li><input type="hidden" name="email" th:value="${session.mem.email}"></li>
+									<li><input type="password" name="pw" placeholder="PW를 입력하세요" style="width: 500px; margin: 0 auto;"></li>
+									<li><input type="text" name="tel" th:value="${session.mem.tel}" placeholder="전화번호를 입력하세요" style="width: 500px; margin: 0 auto;"></li>
+									<li><input type="text" name="address" th:value="${session.mem.address}" placeholder="집주소를 입력하세요" style="width: 500px; margin: 0 auto;"></li>
 									<li><input type="submit" value="update" class="button fit" style="width: 500px; margin: 0 auto;"></li>
 								</form>
 						</ul>
