@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lg.myapp.model.Member;
+
 // @Controller
 // 이 클래스는 일반 자바클래스가 아니라 클라이언트의 요청을 받는 Controller임을 명시
 @Controller
@@ -12,8 +14,10 @@ public class MemberController {
 	
 	// 회원가입 기능
 	@PostMapping("/memberJoin") // contextPath + "/memvverJoin" 요청이 들어오면 아래 메소드 실행
-	public String memberJoin() {
+	public String memberJoin(Member mem) {
 		System.out.println("[회원가입 컨트롤러]");
+		System.out.println(mem.toString());
+		
 		return "JoinSuccess";
 	}
 	
