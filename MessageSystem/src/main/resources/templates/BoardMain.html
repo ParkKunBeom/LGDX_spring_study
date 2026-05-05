@@ -19,6 +19,21 @@
 						<td>작성자</td>
 						<td>시간</td>
 					</tr>
+					
+					<!-- 쿼리스트링 방식 -->
+					<!--  url?keyu1=val1&key2=val2 -->
+					<!--  실제 요청 URL : /boardDetail?idx=3 -->
+					<!-- 장점 : 데이터를 여러개 보낼수 있음 -->
+					
+					<!--  PathVariable방식 -->
+					<!-- url/3 -->
+					<tr th:each="board, stat : ${boardList}">
+						<td th:text="${stat.count}"></td>
+						<td><a th:href="@{/boardDetail/{num}(num=${board.idx})}" th:text="${board.title}"></a></td>
+						<td th:text="${board.writer}"></td>
+						<td th:text="${board.b_date}"></td>
+						<td><a th:if="${session.mem != null and session.mem.email == 'admin'}"  th:href="@{/boardDelete/{idx}(idx=${board.idx})}">삭제</a></td>
+					</tr>
 				</table>
 				
 				<a th:href="@{/}"><button id="writer">홈으로가기</button></a>

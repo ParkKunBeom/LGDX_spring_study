@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lg.myapp.model.Member;
 
@@ -19,7 +20,7 @@ import jakarta.servlet.http.HttpSession;
 // 이 클래스는 일반 자바 클래스가 아니라 클라이언트의 요청을 받는 
 @Controller
 public class MemberController {
-
+	
 	// 인터페이스는 바디가 없는 추상메서드만 존재하기 때문에 객체 생성X
 	@Autowired
 	private MemberMapper mapper;

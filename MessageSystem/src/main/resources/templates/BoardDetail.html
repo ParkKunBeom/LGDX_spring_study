@@ -13,27 +13,27 @@
 				<table id="list">
 					<tr>
 						<td>제목</td>
-						<td></td>
+						<td th:text="${board.title}"></td>
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td></td>
+						<td th:text="${board.writer}"></td>
 					</tr>
 					<tr>
 						<td>다운로드</td>
-						<td><a ></a></td>
+						<td><a th:href="@{/upload/{file}(file=${board.filename})}" th:text="${board.filename}" download></a></td>
 					</tr>
 					<tr>
 						<td colspan="2">내용</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<h3>여기에 내용 출력</h3>
-							<img alt="" src="">
+							<h3 th:text="${board.content}"></h3>
+							<img alt="" th:src="@{/upload/{file}(file=${board.filename})}">
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><a ><button>뒤로가기</button></a></td>
+						<td colspan="2"><a th:href="@{/boardMain}"><button>뒤로가기</button></a></td>
 					</tr>
 				</table>
 			</div>

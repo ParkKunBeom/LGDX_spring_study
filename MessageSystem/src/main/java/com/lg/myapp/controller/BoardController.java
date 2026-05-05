@@ -1,17 +1,33 @@
 package com.lg.myapp.controller;
 
 import java.io.File;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lg.myapp.mapper.BoardMapper;
 import com.lg.myapp.model.Board;
 
 @Controller
 public class BoardController {
+	
+	@Autowired
+	private BoardMapper mapper;
+	
+	// 상세보기 페이지로 이동 + 내가 선택한 특정 게시물 데이터 가져오기
+	@GetMapping("/boardDetail/{a}") // 실제 요청 URL : /boardDetail?idx=3
+	public String boardDetail(@PathVariable int a, Model model) {
+		Board board = mapper.boardDetail(a);
+		model.addAttribute("board", board);
+		return "BoardDetail";
+	}
 	
 	// 파일 업로드 기능
 	@PostMapping("/boardUpload") //title, writer, content, uploadFile
@@ -57,19 +73,34 @@ public class BoardController {
 		// 실제 파일을 폴더에 저장
 		file.transferTo(savedFile);
 		
-		return "BoardMain";
+		// DB에 데이터 저장
+		board.setFilename(newFileName); // title, writer, filename, content
+		mapper.uploadBoard(board);
+		
+		return "redirect:/boardMain";
 	}
 	
 	// BoardWrite페이지로 이동
 	@GetMapping("/boardWrite")
-	public String bordWrite() {
+	public String boardWrite() {
 		return "boardWrite";
 	}
 	
-	// BoardMain페이지로 이동
+	// BoardMain페이지로 이동 + DB에 있는 모든 게시물들을 가져와서 목록에 띄우기
 	@GetMapping("/boardMain")
-	public String boardMain() {
+	public String boardMain(Model model) {
+		
+		List<Board> boardList = mapper.boardList();
+		model.addAttribute("boardList", boardList);
+		
 		return "BoardMain";
+	}
+	
+	// 삭제
+	@GetMapping("/boardDelete/{idx}")
+	public String boardDelete(@PathVariable int idx) {
+		mapper.boardDelete(idx);
+		return "redirect:/boardMain";
 	}
 	
 }

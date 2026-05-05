@@ -18,4 +18,5 @@ public interface MemberMapper {
 	public void memberUpdate(Member mem);
 
 	public List<Member> showMember();
+
 }
