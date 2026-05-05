@@ -26,10 +26,10 @@ public class MemberController {
 	
 	// 전체회원정보 페이지로 이동 + DB에서 정보도 가져오기
 	@GetMapping("/showForm")
-	public String showForm() {
+	public String showForm(Model model) {
 		
 		List<Member> list = mapper.showMember();
-		System.out.println(list.size());
+		model.addAttribute("list",list);
 		return "ShowMember";
 	}
 
