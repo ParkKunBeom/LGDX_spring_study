@@ -19,7 +19,7 @@
 		<header id="header" class="alt"> <a href="index.html"
 			class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a> <nav>
 		<!-- Q6. 로그인을 한 상태에서는 로그인탭 대신 로그아웃탭과 개인정보수정탭을 출력 --> 
-		<a href="#menu">로그인</a>
+		<a href="#menu" th:if="${session.mem==null}">로그인</a>
 		<a th:unless="${session.mem == null}" th:href="@{/updateForm}">개인정보수정</a>
 		<a th:unless="${session.mem == null}" th:href="@{/memberLogout}">로그아웃</a>
 		<!-- Q7. 개인정보수정 기능 만들기 --> 
