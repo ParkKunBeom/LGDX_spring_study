@@ -1,9 +1,13 @@
 package com.lg.myapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.lg.myapp.entity.MemberEntity;
+
+import jakarta.transaction.Transactional;
 
 // Mybatis에서 인터페잇 위쪽에 @mapper라는 어노테이션 사용
 @Repository //JPA에서 사용하는 어노테이션
@@ -27,4 +31,11 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long>{
 	// find + (테이블명) + By + 컬럼명 + And + 컬럼명
 	// -> findByEmailAndPw()
 	public MemberEntity findByEmailAndPw(String email, String pw);
+	
+	// update member set count = count+1 where idx=2
+//	@Transactional //insert, delete, update 실행 시 에러가 발생하면 rollback
+//	@Modifying // insert, delete, update 시에는 무조건 써줘야함
+//	@Query("update MemberEntity m set m.count = m.count+1 where m.idx= :idx")
+//	public void countUp(Long idx);
+	
 }
